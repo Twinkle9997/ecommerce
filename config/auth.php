@@ -40,6 +40,26 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+        'seller' => [
+            'driver' => 'session',
+            'provider' => 'sellers',
+        ],
+        'buyer' => [
+            'driver' => 'session',
+            'provider' => 'buyers',
+        ],
+        'delivery' => [
+            'driver' => 'session',
+            'provider' => 'deliveries',
+        ],
     ],
 
     /*
@@ -60,15 +80,22 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'sellers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Seller::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'buyers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Buyer::class,
+        ],
+        'deliveries' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Delivery::class,
+        ],
     ],
 
     /*
@@ -87,11 +114,26 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'seller' => [
+            'provider' => 'sellers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'buyers' => [
+            'provider' => 'buyers',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'deliveries' => [
+            'provider' => 'deliveries',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 

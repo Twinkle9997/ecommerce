@@ -12,6 +12,7 @@
         "laravel/sanctum": "^2.15.1",
         "laravel/socialite": "^5.6.1",
         "laravel/tinker": "^2.8.0",
+        "laravel/ui": "^4.2",
         "myclabs/php-enum": "^1.8.4"
     },
     "require-dev": {
