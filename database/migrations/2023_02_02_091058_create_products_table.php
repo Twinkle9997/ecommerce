@@ -15,29 +15,25 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-
+            // user id
+            $table->string('user_id');
             // materials
-            $table->unsignedBigInteger('material_id');
-            $table->foreign('material_id')->references('id')->on('materials');
-
+            $table->bigInteger('material_id');
             // vouchers
-            $table->unsignedBigInteger('voucher_id');
-            $table->foreign('voucher_id')->references('id')->on('vouchers');
-
+            $table->bigInteger('voucher_id');
             // vouchers
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
-
+            $table->bigInteger('category_id');
+            
             $table->string('product_name');
-            $table->integer('quantity');
             $table->longText('details');
+            $table->enum('voucher_start', [0, 1])->default(0);
+
+            $table->enum('promote', [0,1])->default(0);
+            $table->enum('display', [0,1])->default(1);
+
             $table->double('amount', 8, 2);
             $table->double('discounted_price', 8, 2);
-            $table->double('width', 8, 2);
-            $table->double('height', 8, 2);
-            $table->double('weight', 8, 2);
-            $table->enum('return', ['y', 'n']);
-            $table->integer('courier');
+            
             $table->timestamps();
         });
     }

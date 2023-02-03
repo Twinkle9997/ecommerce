@@ -19,8 +19,9 @@ class labelTextWithAlert extends Component
     public $tooltip;
     public $peerName;
     public $peerCondition;
+    public $required;
 
-    public function __construct($label, $type, $name, $placeholder, $tooltip, $peerName, $peerCondition)
+    public function __construct($label, $type, $name, $placeholder, $tooltip, $peerName, $peerCondition, $required = null)
     {
         $this->label = $label;
         $this->type = $type;
@@ -29,6 +30,7 @@ class labelTextWithAlert extends Component
         $this->tooltip = $tooltip;
         $this->peerName = $peerName;
         $this->peerCondition = $peerCondition;
+        $this->required = $required;
     }
 
     /**

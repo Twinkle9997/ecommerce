@@ -5,10 +5,18 @@ use App\Http\Controllers\admin\Signup;
 use App\Http\Controllers\seller\ProductController;
 use App\Http\Controllers\seller\{CategoryController, VoucherController, MaterialController};
 
+
 Route::view('/seller/login', "seller/login")->name("seller.login");
 Route::view('/seller/signup', "seller/signup")->name("seller.signup");
-Route::view('/seller/index', "seller/productUpload")->name("sellers.uploadForm");
 
+Route::get('/seller/products-list', [ProductController::class, "showList"])->name("seller.products");
+
+// Route::view('', "seller/productUpload")->name("");
+Route::get('seller/index', [ProductController::class, "Index"])->name('sellers.uploadForm');
+
+Route::group(['prefix' => "productUpload"], function(){
+    Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
+});
 
 Route::group(["prefix" => 'seller'], function(){
     Route::POST('signup', [AuthController::class, 'Signup'])->name('seller.signup');
@@ -19,24 +27,15 @@ Route::group(["prefix" => 'seller'], function(){
     Route::POST('/login', [AuthController::class, "Login"])->name('seller.login');
 });
 
-
 Route::group(['prefix' => 'product'], function(){
-
  Route::POST('signup', [AuthController::class, 'Signup'])->name('seller.signup');
-
  Route::view('otp', 'seller/otp')->name('seller.otp');
  Route::POST('otp', [AuthController::class, "checkOTP"])->name('seller.checkOtp');
-
  Route::POST('login', [AuthController::class, "Login"])->name('seller.login');
- 
 });
-
-
 
 Route::group(['prefix' => 'seller'], function(){
 
-    Route::POST('/upload', [ProductController::class, 'Upload'])->name('form.upload');
-    
     // vouchers
     Route::POST('/voucher/form', [VoucherController::class, 'create'])->name('form.voucher');
 
@@ -48,8 +47,6 @@ Route::group(['prefix' => 'seller'], function(){
 
     // vouchers updated 
     Route::POST("/voucher/form/updated", [VoucherController::class, 'updated'])->name('form.voucher.updated');
-
-
 
     // material
     // create material
@@ -63,8 +60,6 @@ Route::group(['prefix' => 'seller'], function(){
 
     // material updated
     Route::put('/material/form/edited', [MaterialController::class, 'updated'])->name('form.material.updated');
-
-
 
     // category
     // category create
@@ -81,16 +76,13 @@ Route::group(['prefix' => 'seller'], function(){
     
 });
 
-
 Route::group(['prefix' => 'seller/form'], function(){
-
     Route::get('category', [CategoryController::class, "index"])->name('category');
-
     Route::get('material', [MaterialController::class, "index"])->name('material');
-
     Route::get('voucher', [VoucherController::class, "index"])->name('voucher');
-
 });
+
+
 
 
 

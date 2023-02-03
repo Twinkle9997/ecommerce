@@ -14,6 +14,27 @@
             <x-common.input-with-label type="text" placeholder="In Percentage" warningText=" (In Percentage)"
                 name='percent' label="Percent" />
 
+            <div>
+                <label for="category" class="text-sm sm:text-base">
+                    Coupon Start
+                </label>
+                <select name="start"
+                    class="border block w-full rounded px-2 py-[2px] focus:outline-none focus:outline-none capitalize "
+                    id="category">
+                    <option value=""> Select </option>
+                    <option value="1"> Yes </option>
+                    <option value="0"> No </option>
+                </select>
+            </div>
+
+            <x-common.input-with-label type="datetime-local" placeholder="" warningText=" (Coupon start date)"
+                name='startDate' label="Coupon Start Date" />
+
+            <x-common.input-with-label type="datetime-local" placeholder="" warningText=" (Coupon end date)" name='endDate'
+                label="Coupon End Date" />
+
+
+
             <div class="text-center">
                 <x-common.button-second type="Submit" title="Create" />
             </div>
@@ -22,7 +43,7 @@
 
 
 
-    <div class="mt-[50px] mb-5 max-w-[calc(100%-40px)] md:w-[500px] w-full my-4 rounded  shadow mx-auto">
+    <div class="mt-[50px] flex flex-col mb-5 max-w-[calc(100%-40px)] md:w-[auto] w-full my-4 rounded  shadow mx-auto">
         @if (session('deleted'))
             <p class="py-1 w-full text-center bg-red-100 my-2">
                 {{ session('deleted') }}
@@ -35,6 +56,9 @@
                     <td> Sno. </td>
                     <td> Name </td>
                     <td> Discount </td>
+                    <td> Start </td>
+                    <td> Start Date </td>
+                    <td> End Date </td>
                     <td> Action </td>
                 </tr>
             </thead>
@@ -47,6 +71,29 @@
                         <td> {{ $a++ }} </td>
                         <td> {{ $data['name'] }} </td>
                         <td> {{ $data['discount'] }} </td>
+                        <td>
+                            @if ($data['start'] == 0)
+                                <span class='bg-bgRed px-1 text-sm rounded text-white'> No </span>
+                            @else
+                                <span class='bg-bgGreen px-1 text-sm rounded text-white'> Yes </span>
+                            @endif
+
+                        </td>
+                        <td>
+                            @if ($data['startDate'])
+                                {{ $data['startDate'] }}
+                            @else
+                                <i class="fa-solid fa-xmark"></i>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($data['endDate'])
+                                {{ $data['endDate'] }}
+                            @else
+                                <i class="fa-solid fa-xmark"></i>
+                            @endif
+                        </td>
+
                         <td>
                             <div class="flex justify-center gap-2">
                                 <form action="{{ route('voucher.delete', ['id' => $data->id]) }}" method="post">
@@ -70,6 +117,9 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 
+    <div class="min-w-full">
+        {{ $voucher->links() }}
     </div>
 @endsection

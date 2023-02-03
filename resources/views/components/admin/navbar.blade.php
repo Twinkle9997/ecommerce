@@ -16,7 +16,7 @@
         <a href="{{ route('category') }}">
             Categories
         </a>
-        <a href="">
+        <a href="{{ route('seller.products') }}">
             Products
         </a>
 

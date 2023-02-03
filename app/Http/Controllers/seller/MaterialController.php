@@ -5,6 +5,7 @@ namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use App\Models\seller\Materials;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaterialController extends Controller
 {
@@ -21,6 +22,7 @@ class MaterialController extends Controller
         ]);
         $mat = new Materials();
         $mat->material = strtolower($req->material);
+        $mat->user_id = Auth::user()->id;
         $saved = $mat->save();
 
         if($saved)

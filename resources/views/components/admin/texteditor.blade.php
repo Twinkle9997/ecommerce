@@ -3,8 +3,7 @@
         Product Details
         <span class="text-xs text-textRed"> As much as possible </span>
     </label>
-    <textarea class="firstTextEditor">
-    </textarea>
+    <textarea name="description" class="firstTextEditor"></textarea>
 </div>
 
 @section('js')

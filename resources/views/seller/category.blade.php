@@ -17,8 +17,8 @@
         <form id="formSubmit" action="{{ route('form.category') }}" method="post" class="flex flex-col gap-2">
             @csrf
 
-            <x-common.input-with-label type="text" placeholder="Coupon" warningText=" (Coupon Code)" name='category'
-                label="Create Coupon" value="{{ old('category') }}" />
+            <x-common.input-with-label type="text" placeholder="Category of the product" warningText="" name='category'
+                label="Create Category" value="{{ old('category') }}" />
 
             <div class="text-center">
                 <x-common.button-second type="Submit" title="Create" />

@@ -15,8 +15,8 @@
 
         <form id="formSubmit" action="{{ route('form.material') }}" method="post" class="flex flex-col gap-2">
             @csrf
-            <x-common.input-with-label type="text" placeholder="Coupon" warningText=" (Coupon Code)" name='material'
-                label="Create Coupon" />
+            <x-common.input-with-label type="text" placeholder="Coupon" warningText="" name='material'
+                label="Create Material Or Fabric" />
 
 
             <div class="text-center">

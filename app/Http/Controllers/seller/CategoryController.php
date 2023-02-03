@@ -5,6 +5,7 @@ namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use App\Models\seller\Categories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -24,6 +25,7 @@ class CategoryController extends Controller
         {
             $cat = new Categories();
             $cat->name = strtolower($req->category);
+            $cat->user_id = Auth::user()->id;
             $saved = $cat->save();
             if($saved)
             {

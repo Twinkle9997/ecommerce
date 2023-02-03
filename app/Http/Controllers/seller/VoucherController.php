@@ -5,19 +5,20 @@ namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use App\Models\seller\Vouchers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VoucherController extends Controller
 {
     public function index()
     {
-        $data = Vouchers::all();
+        $data = Vouchers::paginate(10);
         return view('seller/voucher', ['voucher'=>$data]);
     }
 
     public function create(Request $req)
     {
         $validate = $req->validate([
-            'coupon' => "required",
+            'coupon' => "required|unique:vouchers,name",
             'percent' => "required|max:20",
         ]);
 
@@ -25,13 +26,17 @@ class VoucherController extends Controller
         if($validate)
         {
             $save = new Vouchers();
-            $save->name = strtolower($req->coupon);
+            $save->name = strtoupper($req->coupon);
             $save->discount = $req->percent;
+            $save->user_id = Auth::user()->id;
+            $save->start = $req->start !== null ? $req->start : '0';
+            $save->startDate = $req->startDate;
+            $save->endDate = $req->endDate;
             $save->save();
 
             if($save)
             {
-                return redirect()->back();
+                return redirect()->back()->with('success', "Vocuher saved successfully");
             }
         }
     }
@@ -69,6 +74,9 @@ class VoucherController extends Controller
 
         $vo->name = $req->coupon;
         $vo->discount = $req->percent;
+        $vo->start = $req->start;
+        $vo->startDate = $req->startDate;
+        $vo->endDate = $req->endDate;
         $vo->save();
 
         return redirect()->route('voucher');
