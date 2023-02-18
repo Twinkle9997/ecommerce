@@ -78,10 +78,13 @@
                             name="title" placeholder="Product Name" tooltip="In 150 characters" peerName="peer/title12323"
                             peerCondition="peer-focus/title12323:block" required="required" />
                     </div>
+
+                    {{-- product Category and material --}}
                     <div class="mt-3 w-full flex flex-col justify-between md:flex-row">
                         <div class="sm:w-[calc(50%-5px)]">
                             <label for="category" class="text-sm sm:text-base">
-                                Product Category <span class="text-textRed"> * </span>
+                                Product Category
+                                <span class="text-textRed"> * </span>
                             </label>
                             <select name="category"
                                 class="border block w-full rounded px-2 py-[2px] focus:outline-none focus:outline-none capitalize "
@@ -117,6 +120,57 @@
 
 
                     </div>
+
+                    {{-- Size and Color --}}
+                    <div class="mt-3 w-full flex flex-col justify-between md:flex-row">
+                        <div class="sm:w-[calc(50%-5px)]">
+                            <label for="category" class="text-sm sm:text-base">
+                                Size
+                                <span class="text-textRed"> * </span>
+                            </label>
+                            <select name="size"
+                                class="border block w-full rounded px-2 py-[2px] focus:outline-none focus:outline-none capitalize "
+                                id="size" required>
+                                <option value=""> Select Sizes Multiple </option>
+                                @foreach ($size as $size)
+                                    <option value="{{ $size->id }}">
+                                        {{ $size->name }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                        <div class="w-full md:w-[calc(50%-5px)]">
+                            <label for="fab">
+                                Color
+                                <span class="text-xs text-textRed">
+                                    (Not Mandetory)
+                                </span>
+                            </label>
+                            <select name="color"
+                                class="border block w-full rounded px-2 py-[2px] focus:outline-none focus:outline-none capitalize "
+                                id="color" required>
+
+                                <option value=""> Select Material </option>
+                                @foreach ($color as $color)
+                                    <option value="{{ $color->id }}">
+                                        <div class="flex gap-1">
+                                            <div class="w-6 h-6 rounded-full" style="background: red">
+                                            </div>
+                                            {{ $color->name }}
+                                        </div>
+                                    </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+
+                    </div>
+
+
+
                     {{-- texteditor --}}
                     <div class="mt-3">
                         <x-admin.texteditor />

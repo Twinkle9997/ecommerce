@@ -5,7 +5,7 @@
 
     <div class="w-[calc(100%-40px)] md:max-w-[500px] shadow-xl my-5 mx-auto rounded p-4 mx-auto">
         <div class="text-center mb-3 text-textRed text-[calc(15px+1vw)] font-semibold">
-            Create Category
+            Create Color
         </div>
 
         @if (session('success'))
@@ -14,13 +14,20 @@
             </div>
         @endif
 
-        <form id="main_form" action="{{ route('form.category') }}" method="POST" class="flex flex-col gap-2">
-
+        @if (session('error'))
+            <div class="py-1 my-2 bg-red-200 rounded w-full text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+        {{-- id="main_form" --}}
+        <form action="{{ route('color.seller') }}" method="POST" class="flex flex-col gap-2">
             @csrf
-            <x-common.input-with-label type="text" placeholder="Category of the product" warningText="" name='category'
-                label="Create Category" value="{{ old('category') }}" />
 
+            <x-common.input-with-label type="color" placeholder="Category of the product" warningText="" name='color'
+                label="Create Color" value="{{ old('color') ?? '#e0115f' }}" />
 
+            {{-- <x-common.input-with-label type="text" placeholder="Category of the product" warningText="" name='color_name'
+                label="Create Color Name" value="{{ old('color_name') ?? '#e0115f' }}" /> --}}
 
             <div class="text-center">
                 <x-common.button-second type="Submit" title="Create" />
@@ -50,26 +57,31 @@
                 @php
                     $a = 1;
                     // echo '<pre>';
-                    
+                    // echo Auth::user()->id;
                     // print_r($category);
                 @endphp
-                @forelse ($category as $data)
+                @forelse ($color as $data)
                     <tr class="odd:bg-gray-100 even:bg-gray-200 h-12">
                         <td> {{ $a++ }} </td>
-                        <td class="capitalize"> {{ $data['name'] }} </td>
+                        <td class="flex justify-center items-center">
+                            <div class="w-8 h-8 mt-2 rounded-full" title="{{ $data->name }}"
+                                style="background: {{ $data->name }}"></div>
+                        </td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('form.category.delete', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('colordelete.seller') }}/{{ $data->id }}" method="post">
                                     @csrf
                                     @method('delete')
+
                                     <button type="Submit"
                                         class="p-2 bg-red-700 shadow fas fa-trash text-white rounded text-sm">
                                     </button>
                                 </form>
 
-                                <form action="{{ route('form.category.editData', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('coloredit.seller') }}" method="post">
                                     @csrf
                                     @method('put')
+                                    <input type="hidden" name="id" value="{{ $data->id }}">
                                     <button type="Submit"
                                         class="p-2 bg-green-600 shadow fas fa-edit text-white rounded text-sm">
                                     </button>
@@ -89,8 +101,25 @@
             </tbody>
         </table>
         <div class="p-2">
-            {{ $category->links() }}
+            {{ $color->links() }}
         </div>
 
     </div>
+@endsection
+@section('JS')
+    <script>
+        $(document).ready(function() {
+
+            $("#color").change(function() {
+                var col = $("#color").val();
+                $("#color_name").val(col);
+            });
+
+            // $("#color_name").change(function() {
+            //     var col = $("#color_name").val();
+            //     $("#color").val(col);
+            // });
+
+        });
+    </script>
 @endsection

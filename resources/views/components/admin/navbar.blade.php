@@ -16,6 +16,12 @@
         <a href="{{ route('category') }}">
             Categories
         </a>
+        <a href="{{ route('size') }}">
+            Size
+        </a>
+        <a href="{{ route('color') }}">
+            Color
+        </a>
         <a href="{{ route('seller.products') }}">
             Products
         </a>

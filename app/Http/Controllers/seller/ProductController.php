@@ -4,11 +4,14 @@ namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
 use App\Models\seller\Categories;
+use App\Models\seller\Colors;
 use App\Models\Seller\Couriers;
 use App\Models\seller\Files;
 use App\Models\seller\Materials;
 use App\Models\seller\Products;
+use App\Models\seller\Sizes;
 use App\Models\seller\Vouchers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,8 +25,10 @@ class ProductController extends Controller
         $cat = Categories::all();
         $mat = Materials::all();
         $vouch = Vouchers::all();
+        $size = Sizes::all();
+        $color = Colors::all();
 
-        return view('seller/productUpload', ['cat' => $cat, 'mat' => $mat, 'vo' => $vouch]);
+        return view('seller/productUpload', ['cat' => $cat, 'mat' => $mat, 'vo' => $vouch, 'size' => $size, 'color' => $color]);
     }
 
     public function Upload(Request $req)
@@ -34,7 +39,7 @@ class ProductController extends Controller
         $pro = new Products();
 
 
-        $pro->user_id = 2;
+        $pro->user_id = Auth::user()->id;
         $pro->material_id = $req->material;
         $pro->voucher_id = $req->id;
         $pro->category_id = $req->category;
@@ -44,11 +49,13 @@ class ProductController extends Controller
         $pro->promote = $req->special;
         $pro->discounted_price = $req->discountedPrice;
         $pro->voucher_id = $req->voucher;
+        $pro->color = $req->color;
+        $pro->size = $req->size;
         // $pro->voucher_start = $req->voucher_start;
         $saved = $pro->save();
         
         $co = new Couriers();
-        $co->user_id = 2;
+        $co->user_id = Auth::user()->id;;
         $co->product_id = $pro->id;
         $co->delivery_charges = $req->courier;
         $co->weight = $req->weight;
@@ -71,7 +78,7 @@ class ProductController extends Controller
             $file = new Files();
 
             $file->product_id = $pro->id;
-            $file->user_id = 2;
+            $file->user_id = Auth::user()->id;
 
             $file->file = $fileName;
             $file->save();
@@ -84,5 +91,4 @@ class ProductController extends Controller
     {
         return view('seller/products');
     }
-
 }

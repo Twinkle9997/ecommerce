@@ -5,7 +5,7 @@
 
     <div class="w-[calc(100%-40px)] md:max-w-[500px] shadow-xl my-5 mx-auto rounded p-4 mx-auto">
         <div class="text-center mb-3 text-textRed text-[calc(15px+1vw)] font-semibold">
-            Create Category
+            Create Size
         </div>
 
         @if (session('success'))
@@ -14,13 +14,19 @@
             </div>
         @endif
 
-        <form id="main_form" action="{{ route('form.category') }}" method="POST" class="flex flex-col gap-2">
+        @if (session('error'))
+            <div class="py-1 my-2 bg-green-100 rounded w-full text-center">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        <form action="{{ route('size.seller') }}" method="POST" class="flex flex-col gap-2">
 
             @csrf
-            <x-common.input-with-label type="text" placeholder="Category of the product" warningText="" name='category'
-                label="Create Category" value="{{ old('category') }}" />
 
-
+            <x-common.input-with-label type="text" placeholder="Measurement quantity"
+                warningText="Measurement quantity (like: Meter, Centimeter, Feet, Liter, Barrel etc)" name='measurement'
+                label="Measurement Units" value="{{ old('measurement') }}" />
 
             <div class="text-center">
                 <x-common.button-second type="Submit" title="Create" />
@@ -42,24 +48,25 @@
             <thead class="w-full h-12">
                 <tr>
                     <td> Sno. </td>
-                    <td> Name </td>
+                    <td> Size </td>
                     <td> Action </td>
                 </tr>
             </thead>
             <tbody>
                 @php
                     $a = 1;
-                    // echo '<pre>';
-                    
-                    // print_r($category);
                 @endphp
-                @forelse ($category as $data)
+                @forelse ($size as $data)
                     <tr class="odd:bg-gray-100 even:bg-gray-200 h-12">
-                        <td> {{ $a++ }} </td>
-                        <td class="capitalize"> {{ $data['name'] }} </td>
+                        <td>
+                            {{ $a++ }}
+                        </td>
+                        <td class="capitalize">
+                            {{ $data['name'] }}
+                        </td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('form.category.delete', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('sizedelete.seller', ['id' => $data->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="Submit"
@@ -67,7 +74,7 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('form.category.editData', ['id' => $data->id]) }}" method="post">
+                                <form action="" method="post">
                                     @csrf
                                     @method('put')
                                     <button type="Submit"
@@ -81,7 +88,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="3">
+                        <td colspan="4">
                             <p> No Record Found </p>
                         </td>
                     </tr>
@@ -89,7 +96,7 @@
             </tbody>
         </table>
         <div class="p-2">
-            {{ $category->links() }}
+            {{ $size->links() }}
         </div>
 
     </div>

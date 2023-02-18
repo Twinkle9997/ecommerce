@@ -3,7 +3,7 @@
 use App\Http\Controllers\seller\AuthController;
 use App\Http\Controllers\admin\Signup;
 use App\Http\Controllers\seller\ProductController;
-use App\Http\Controllers\seller\{CategoryController, VoucherController, MaterialController};
+use App\Http\Controllers\seller\{CategoryController, ColorController, VoucherController, MaterialController, SizeController};
 
 
 Route::view('/seller/login', "seller/login")->name("seller.login");
@@ -11,8 +11,12 @@ Route::view('/seller/signup', "seller/signup")->name("seller.signup");
 
 Route::get('/seller/products-list', [ProductController::class, "showList"])->name("seller.products");
 
-// Route::view('', "seller/productUpload")->name("");
+
 Route::get('seller/index', [ProductController::class, "Index"])->name('sellers.uploadForm');
+
+Route::group(['prefix' => "productUpload"], function(){
+    Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
+});
 
 Route::group(['prefix' => "productUpload"], function(){
     Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
@@ -80,7 +84,25 @@ Route::group(['prefix' => 'seller/form'], function(){
     Route::get('category', [CategoryController::class, "index"])->name('category');
     Route::get('material', [MaterialController::class, "index"])->name('material');
     Route::get('voucher', [VoucherController::class, "index"])->name('voucher');
+    Route::get('size', [SizeController::class, "size"])->name('size');
+    Route::get('color', [ColorController::class, "color"])->name('color');
 });
+
+Route::group(['prefix' => 'form'], function(){
+    Route::POST('seller/color', [ColorController::class, 'create'])->name('color.seller');
+    Route::PUT('seller/coloredit', [ColorController::class, 'edit'])->name('coloredit.seller');
+    Route::POST('seller/colorupdate', [ColorController::class, 'update'])->name('colorupdate.seller');
+    Route::DELETE('seller/colordelete/{id?}', [ColorController::class, 'delete'])->name('colordelete.seller');
+});
+
+Route::group(['prefix' => 'form'], function(){
+    Route::POST('seller/size', [SizeController::class, 'create'])->name('size.seller');
+    Route::PUT('seller/sizeedit', [SizeController::class, 'edit'])->name('sizeedit.seller');
+    Route::POST('seller/sizeupdate', [SizeController::class, 'update'])->name('sizeupdate.seller');
+    Route::DELETE('seller/sizedelete/{id?}', [SizeController::class, 'delete'])->name('sizedelete.seller');
+});
+
+
 
 
 

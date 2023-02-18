@@ -7,12 +7,12 @@
             </span>
         @endif
     </label>
-    <input type="{{ $type }}" name="{{ $name }}"
+    <input type="{{ $type }}" id="{{ $name }}" name="{{ $name }}"
         class="w-full focus:outline-none h-8 rounded border-[1px] px-2" value="{{ $value }}"
         placeholder="{{ $placeholder }}" />
-    @error($name)
-        <span class="text-xs text-textRed">
-            {{ $message }}
-        </span>
-    @enderror
+
+    <span class="text-xs text-textRed error-text {{ $name . '_error' }}">
+
+    </span>
+
 </div>
