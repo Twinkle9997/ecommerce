@@ -18,7 +18,6 @@ return [
         'passwords' => 'users',
     ],
 
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -41,10 +40,25 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
         'seller' => [
             'driver' => 'session',
-            'provider' => 'seller_auths',
+            'provider' => 'sellers',
+        ],
+        'buyer' => [
+            'driver' => 'session',
+            'provider' => 'buyers',
+        ],
+        'delivery' => [
+            'driver' => 'session',
+            'provider' => 'deliveries',
         ],
     ],
 
@@ -66,20 +80,22 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'sellers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Seller::class,
         ],
-
-        'seller_auths' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Seller\SellerAuth::class,
+            'model' => App\Models\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'buyers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Buyer::class,
+        ],
+        'deliveries' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Delivery::class,
+        ],
     ],
 
     /*
@@ -98,11 +114,26 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
+        'seller' => [
+            'provider' => 'sellers',
+            'table' => 'seller_password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+        'buyers' => [
+            'provider' => 'buyers',
+            'table' => 'buyer_password_resets',
+            'expire' => 60,
+        ],
+        'deliveries' => [
+            'provider' => 'deliveries',
+            'table' => 'delivery_password_resets',
+            'expire' => 60,
         ],
     ],
 

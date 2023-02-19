@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/dashboard';
 
     /**
      * The controller namespace for the application.
@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -37,16 +37,76 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+        parent::boot();
+    }
 
-            Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
-        });
+    /**
+     * Define the routes for the application.
+     *
+     * @return void
+     */
+    public function map()
+    {
+
+        $this->mapWebRoutes();
+        $this->mapApiRoutes();
+
+    }
+
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+        ->domain(config('domains.main.domain'))
+        ->middleware(['api'])
+        ->namespace($this->namespace . '\Buyer\API')
+        ->group(base_path('routes/buyer/api.php'));
+
+        Route::prefix('api')
+            ->as('api.admin.')
+            ->domain(config('domains.admin.domain'))
+            ->middleware(['api'])
+            ->namespace($this->namespace . '\Admin\API')
+            ->group(base_path('routes/admin/api.php'));
+
+        Route::prefix('api')
+            ->as('api.seller.')
+            ->domain(config('domains.seller.domain'))
+            ->middleware(['api'])
+            ->namespace($this->namespace . '\Seller\API')
+            ->group(base_path('routes/seller/api.php'));
+
+        Route::prefix('api')
+            ->as('api.delivery.')
+            ->domain(config('domains.delivery.domain'))
+            ->middleware(['api'])
+            ->namespace($this->namespace . '\Delivery\API')
+            ->group(base_path('routes/delivery/api.php'));
+    }
+
+    protected function mapWebRoutes()
+    {
+        Route::middleware(['web'])
+            ->domain(config('domains.main.domain'))
+            ->namespace($this->namespace . '\Buyer')
+            ->group(base_path('routes/buyer/web.php'));
+
+        Route::middleware('web')
+            ->as('admin.')
+            ->domain(config('domains.admin.domain'))
+            ->namespace($this->namespace . '\Admin')
+            ->group(base_path('routes/admin/web.php'));
+
+        Route::middleware(['web'])
+            ->as('seller.')
+            ->domain(config('domains.seller.domain'))
+            ->namespace($this->namespace . '\Seller')
+            ->group(base_path('routes/seller/web.php'));
+
+        Route::middleware(['web'])
+            ->as('delivery.')
+            ->domain(config('domains.delivery.domain'))
+            ->namespace($this->namespace . '\Delivery')
+            ->group(base_path('routes/delivery/web.php'));
     }
 
     /**

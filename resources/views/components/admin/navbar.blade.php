@@ -4,22 +4,22 @@
     </div>
     <div class="flex gap-4 items-center text-white font-semibold hidden md:flex">
 
-        <a href="{{ route('sellers.uploadForm') }}">
+        <a href="{{ route('seller.uploadForm') }}">
             Home
         </a>
-        <a href="{{ route('material') }}">
+        <a href="{{ route('seller.material') }}">
             Materials
         </a>
-        <a href="{{ route('voucher') }}">
+        <a href="{{ route('seller.voucher') }}">
             Vouchers
         </a>
-        <a href="{{ route('category') }}">
+        <a href="{{ route('seller.category') }}">
             Categories
         </a>
-        <a href="{{ route('size') }}">
+        <a href="{{ route('seller.size') }}">
             Size
         </a>
-        <a href="{{ route('color') }}">
+        <a href="{{ route('seller.color') }}">
             Color
         </a>
         <a href="{{ route('seller.products') }}">
