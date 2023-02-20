@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\seller;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\seller\Colors;
+use App\Models\Colors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,7 +51,7 @@ class ColorController extends Controller
     public function edit(Request $req)
     {
         $check = Colors::find($req->id);
-        return view('seller/coloredit', ["col" => $check]);
+        return view('seller/colorEdit', ["col" => $check]);
     }
 
     public function update(Request $req)
@@ -66,7 +66,7 @@ class ColorController extends Controller
 
             if($updated)
             {
-                return redirect()->route('color')->with('success', 'updated successfully');
+                return redirect()->route('seller.color')->with('success', 'updated successfully');
             }
             else
             {

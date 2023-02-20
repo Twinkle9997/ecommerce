@@ -20,7 +20,7 @@
             </div>
         @endif
 
-        <form action="{{ route('size.seller') }}" method="POST" class="flex flex-col gap-2">
+        <form action="{{ route('seller.size') }}" method="POST" class="flex flex-col gap-2">
 
             @csrf
 
@@ -66,7 +66,7 @@
                         </td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('sizedelete.seller', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.size.delete', ['id' => $data->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="Submit"
@@ -74,13 +74,13 @@
                                     </button>
                                 </form>
 
-                                <form action="" method="post">
+                                <!-- <form action="{{route('seller.size.edit')}}" method="get">
                                     @csrf
-                                    @method('put')
+                                    @method('get')
                                     <button type="Submit"
                                         class="p-2 bg-green-600 shadow fas fa-edit text-white rounded text-sm">
                                     </button>
-                                </form>
+                                </form> -->
 
                             </div>
 

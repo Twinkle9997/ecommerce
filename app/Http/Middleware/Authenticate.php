@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\UserType;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -14,8 +15,17 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        if (!$request->expectsJson()) {
+            switch (get_user_type_by_domain()) {
+                case UserType::Admin:
+                    return route('admin.login');
+                case UserType::Seller:
+                    return route('seller.login');
+                case UserType::Delivery:
+                    return route('delivery.login');
+                default:
+                    return route('login');
+            }
         }
     }
 }

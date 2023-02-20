@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\seller;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\seller\Materials;
+use App\Models\Materials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class MaterialController extends Controller
     public function index()
     {
         $data = Materials::all();
-        return view('seller/material', ['material'=>$data]);
+        return view('seller/material', ['material' => $data]);
     }
 
     public function create(Request $req)
@@ -25,8 +25,7 @@ class MaterialController extends Controller
         $mat->user_id = Auth::user()->id;
         $saved = $mat->save();
 
-        if($saved)
-        {
+        if ($saved) {
             return redirect()->back()->with('success', 'Material created successfully');
         }
     }
@@ -41,18 +40,15 @@ class MaterialController extends Controller
     public function edit($id)
     {
         $mat = Materials::findOrFail($id)->first();
-
-        if($mat->count() > 0)
-        {
+        
+        if ($mat->count() > 0) {
             return view("seller/materialEdit", ['mat' => $mat]);
-        }
-        else
-        {
+        } else {
             return redirect()->back()->withSuccess('Record Not Found');
-        }        
+        }
     }
 
-    public function updated(Request $req, $id)
+    public function update(Request $req, $id)
     {
         $req->validate([
             "material" => "required"
@@ -61,12 +57,9 @@ class MaterialController extends Controller
         $mat = Materials::find($id);
         $mat->material = $req->material;
         $updated = $mat->save();
-        if($updated)
-        {
-            return redirect()->route('material');
-        }
-        else
-        {
+        if ($updated) {
+            return redirect()->route('seller.material');
+        } else {
             return redirect()->back();
         }
 

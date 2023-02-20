@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form id="main_form" action="{{ route('form.category') }}" method="POST" class="flex flex-col gap-2">
+        <form id="main_form" action="{{ route('seller.category.create') }}" method="POST" class="flex flex-col gap-2">
 
             @csrf
             <x-common.input-with-label type="text" placeholder="Category of the product" warningText="" name='category'
@@ -49,9 +49,6 @@
             <tbody>
                 @php
                     $a = 1;
-                    // echo '<pre>';
-                    
-                    // print_r($category);
                 @endphp
                 @forelse ($category as $data)
                     <tr class="odd:bg-gray-100 even:bg-gray-200 h-12">
@@ -59,7 +56,7 @@
                         <td class="capitalize"> {{ $data['name'] }} </td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('form.category.delete', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.category.delete', ['id' => $data->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button type="Submit"
@@ -67,9 +64,9 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('form.category.editData', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.category.edit', ['id' => $data->id]) }}" method="post">
                                     @csrf
-                                    @method('put')
+                                    @method('get')
                                     <button type="Submit"
                                         class="p-2 bg-green-600 shadow fas fa-edit text-white rounded text-sm">
                                     </button>

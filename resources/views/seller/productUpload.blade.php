@@ -216,7 +216,7 @@
                             <x-admin.label-text-with-alert type="number" label="Quantity" name="quantity"
                                 placeholder="Total Number Of Quantity"
                                 tooltip="we will notify you when quantity will lesser than 25%" peerName="peer/quantity"
-                                peerCondition="peer-focus/quantity:block" required="required" required="required" />
+                                peerCondition="peer-focus/quantity:block" required="required" />
                         </div>
                     </div>
 
@@ -239,7 +239,8 @@
                             <x-admin.label-text-with-alert type="number" label="Weight" name="weight"
                                 placeholder="Total Weight of the product in grams"
                                 tooltip="Total weight of the product (if applicable)" peerName="peer/weight"
-                                peerCondition="peer-focus/weight:block" />
+                                peerCondition="peer-focus/weight:block"
+                                required="required" />
                         </div>
                         <div class="w-full sm:w-[calc(50%-5px)] min-w-[250px]">
                             <label for="return" class="text-sm sm:text-base">
@@ -262,13 +263,15 @@
                             <x-admin.label-text-with-alert type="number" label="Courier Charges" name="courier"
                                 placeholder="Courier Charges"
                                 tooltip="Courier charges if applicable (if you leave this empty means seller providing free delivery)"
-                                peerName="peer/courier" peerCondition="peer-focus/courier:block" />
+                                peerName="peer/courier" peerCondition="peer-focus/courier:block" 
+                                required="required" />
                         </div>
                         <div class="w-full min-w-[250px] sm:w-[calc(50%-5px)]">
                             <x-admin.label-text-with-alert type="number" label="Delivery in days" name="delivery_days"
                                 placeholder="Delivery in days"
                                 tooltip="How many days will you take in deliver this product" peerName="peer/ddate"
-                                peerCondition="peer-focus/ddate:block" />
+                                peerCondition="peer-focus/ddate:block"
+                                required="required" />
                         </div>
 
                     </div>

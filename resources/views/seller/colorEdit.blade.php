@@ -21,7 +21,7 @@
         @endif
         {{-- id="main_form" --}}
 
-        <form action="{{ route('colorupdate.seller') }}" method="POST" class="flex flex-col gap-2">
+        <form action="{{ route('seller.color.update') }}" method="POST" class="flex flex-col gap-2">
             @csrf
 
             <x-common.input-with-label type="color" placeholder="Category of the product" warningText="" name='color'

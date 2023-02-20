@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\seller;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\seller\Sizes;
+use App\Models\Sizes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,7 +41,7 @@ class SizeController extends Controller
                 $inserted = $insert->save();
                 if($inserted)
                 {
-                    return redirect()->route('size')->with('success', "$req->measurement inserted
+                    return redirect()->route('seller.size')->with('success', "$req->measurement inserted
                     succssfully");
                 }
             }

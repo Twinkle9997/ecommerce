@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\seller;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\seller\Vouchers;
+use App\Models\Vouchers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,7 +68,7 @@ class VoucherController extends Controller
         }
     }
 
-    public function updated(Request $req)
+    public function update(Request $req)
     {
         $vo = Vouchers::findOrFail($req->id);
 
@@ -79,6 +79,6 @@ class VoucherController extends Controller
         $vo->endDate = $req->endDate;
         $vo->save();
 
-        return redirect()->route('voucher');
+        return redirect()->route('seller.voucher');
     }
 }

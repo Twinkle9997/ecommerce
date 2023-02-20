@@ -22,7 +22,7 @@ class VerificationController extends Controller
             $data->email_verified_at = now();
             $data->save();
             session()->flush();
-            return redirect()->route('buyer.login');
+            return redirect()->route('login');
         }
         else
         {

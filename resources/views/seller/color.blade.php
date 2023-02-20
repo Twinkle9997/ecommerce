@@ -20,7 +20,7 @@
             </div>
         @endif
         {{-- id="main_form" --}}
-        <form action="{{ route('color.seller') }}" method="POST" class="flex flex-col gap-2">
+        <form action="{{ route('seller.color') }}" method="POST" class="flex flex-col gap-2">
             @csrf
 
             <x-common.input-with-label type="color" placeholder="Category of the product" warningText="" name='color'
@@ -69,7 +69,7 @@
                         </td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('colordelete.seller') }}/{{ $data->id }}" method="post">
+                                <form action="{{ route('seller.color.delete') }}/{{ $data->id }}" method="post">
                                     @csrf
                                     @method('delete')
 
@@ -78,9 +78,9 @@
                                     </button>
                                 </form>
 
-                                <form action="{{ route('coloredit.seller') }}" method="post">
+                                <form action="{{ route('seller.color.edit') }}" method="post">
                                     @csrf
-                                    @method('put')
+                                    @method('get')
                                     <input type="hidden" name="id" value="{{ $data->id }}">
                                     <button type="Submit"
                                         class="p-2 bg-green-600 shadow fas fa-edit text-white rounded text-sm">

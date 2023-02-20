@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\seller;
+namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\seller\Categories;
+use App\Models\Categories;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,24 +62,24 @@ class CategoryController extends Controller
     }
 
     // get data for form edit
-    public function editData($id)
+    public function edit($id)
     {
         $cat = Categories::find($id);
         return view('seller/categoryEdit', ['cat' => $cat]);
     }
 
     // updating form
-    public function updated(Request $req)
+    public function update(Request $req, $id)
     {
         $req->validate([
             "category" => "required"
         ]);
         
-        // $update = Categories::find($req->id);
-        // $update->name = $req->category;
-        // $update->save();
+        $update = Categories::find($id);
+        $update->name = $req->category;
+        $update->save();
         
-        // return redirect()->route('category')->with('success', 'Edited Successfully');
+        return redirect()->route('seller.category')->with('success', 'Edited Successfully');
     }
 
 

@@ -6,7 +6,7 @@
         <div class="text-center mb-3 text-textRed text-[calc(15px+1vw)] font-semibold">
             Update Voucher
         </div>
-        <form id="formSubmit" action="{{ route('form.voucher.updated') }}" method="POST" class="flex flex-col gap-2">
+        <form id="formSubmit" action="{{ route('seller.voucher.update') }}" method="POST" class="flex flex-col gap-2">
             @csrf
 
             <input type="hidden" name="id" value="{{ $data->id }}" />

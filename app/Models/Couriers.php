@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\seller;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Couriers extends Model
 {
     use HasFactory;
 }

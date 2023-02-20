@@ -40,7 +40,7 @@
                     Change Password
                 </a>
 
-                <a href="" class="hover:px-3 hover:bg-gray-100 hover:text-textRed p-2  duration-500">
+                <a href="{{ route('seller.logout') }}" class="hover:px-3 hover:bg-gray-100 hover:text-textRed p-2  duration-500">
                     Logout
                 </a>
             </div>

@@ -1,106 +1,106 @@
 <?php
 
-use App\Http\Controllers\seller\AuthController;
-use App\Http\Controllers\admin\Signup;
-use App\Http\Controllers\seller\ProductController;
-use App\Http\Controllers\seller\{CategoryController, ColorController, VoucherController, MaterialController, SizeController};
+// use App\Http\Controllers\seller\AuthController;
+// use App\Http\Controllers\admin\Signup;
+// use App\Http\Controllers\seller\ProductController;
+// use App\Http\Controllers\seller\{CategoryController, ColorController, VoucherController, MaterialController, SizeController};
 
 
-Route::view('/seller/login', "seller/login")->name("seller.login");
-Route::view('/seller/signup', "seller/signup")->name("seller.signup");
+// Route::view('/seller/login', "seller/login")->name("seller.login");
+// Route::view('/seller/signup', "seller/signup")->name("seller.signup");
 
-Route::get('/seller/products-list', [ProductController::class, "showList"])->name("seller.products");
+// Route::get('/seller/products-list', [ProductController::class, "showList"])->name("seller.products");
 
 
-Route::get('seller/index', [ProductController::class, "Index"])->name('sellers.uploadForm');
+// Route::get('seller/index', [ProductController::class, "Index"])->name('sellers.uploadForm');
 
-Route::group(['prefix' => "productUpload"], function(){
-    Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
-});
+// Route::group(['prefix' => "productUpload"], function(){
+//     Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
+// });
 
-Route::group(['prefix' => "productUpload"], function(){
-    Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
-});
+// Route::group(['prefix' => "productUpload"], function(){
+//     Route::POST('/upload', [ProductController::class, 'Upload'])->name('seller.form.upload');
+// });
 
-Route::group(["prefix" => 'seller'], function(){
-    Route::POST('signup', [AuthController::class, 'Signup'])->name('seller.signup');
+// Route::group(["prefix" => 'seller'], function(){
+//     Route::POST('signup', [AuthController::class, 'Signup'])->name('seller.signup');
 
-    Route::view('/otp', 'seller/otp')->name('seller.otp');
+//     Route::view('/otp', 'seller/otp')->name('seller.otp');
 
-    Route::POST('/otp', [AuthController::class, "checkOTP"])->name('seller.checkOtp');
-    Route::POST('/login', [AuthController::class, "Login"])->name('seller.login');
-});
+//     Route::POST('/otp', [AuthController::class, "checkOTP"])->name('seller.checkOtp');
+//     Route::POST('/login', [AuthController::class, "Login"])->name('seller.login');
+// });
 
-Route::group(['prefix' => 'product'], function(){
- Route::POST('signup', [AuthController::class, 'Signup'])->name('seller.signup');
- Route::view('otp', 'seller/otp')->name('seller.otp');
- Route::POST('otp', [AuthController::class, "checkOTP"])->name('seller.checkOtp');
- Route::POST('login', [AuthController::class, "Login"])->name('seller.login');
-});
+// Route::group(['prefix' => 'product'], function(){
+//  Route::POST('signup', [AuthController::class, 'Signup'])->name('seller.signup');
+//  Route::view('otp', 'seller/otp')->name('seller.otp');
+//  Route::POST('otp', [AuthController::class, "checkOTP"])->name('seller.checkOtp');
+//  Route::POST('login', [AuthController::class, "Login"])->name('seller.login');
+// });
 
-Route::group(['prefix' => 'seller'], function(){
+// Route::group(['prefix' => 'seller'], function(){
 
-    // vouchers
-    Route::POST('/voucher/form', [VoucherController::class, 'create'])->name('form.voucher');
+//     // vouchers
+//     Route::POST('/voucher/form', [VoucherController::class, 'create'])->name('form.voucher');
 
-    // vouchers deleted
-    Route::delete("/voucher/form/{id?}", [VoucherController::class, 'delete'])->name('voucher.delete');
+//     // vouchers deleted
+//     Route::delete("/voucher/form/{id?}", [VoucherController::class, 'delete'])->name('voucher.delete');
 
-    // vouchers get edit 
-    Route::put("/voucher/form/get/{id?}", [VoucherController::class, 'edit'])->name('form.voucher.edit');
+//     // vouchers get edit 
+//     Route::put("/voucher/form/get/{id?}", [VoucherController::class, 'edit'])->name('form.voucher.edit');
 
-    // vouchers updated 
-    Route::POST("/voucher/form/updated", [VoucherController::class, 'updated'])->name('form.voucher.updated');
+//     // vouchers updated 
+//     Route::POST("/voucher/form/updated", [VoucherController::class, 'updated'])->name('form.voucher.updated');
 
-    // material
-    // create material
-    Route::POST('/material/form', [MaterialController::class, 'create'])->name('form.material');
+//     // material
+//     // create material
+//     Route::POST('/material/form', [MaterialController::class, 'create'])->name('form.material');
 
-    // material delete
-    Route::delete('/material/form/delete/{id?}', [MaterialController::class, 'delete'])->name('form.material.delete');
+//     // material delete
+//     Route::delete('/material/form/delete/{id?}', [MaterialController::class, 'delete'])->name('form.material.delete');
 
-    // material edit id
-    Route::put('/material/form/edit/{id?}', [MaterialController::class, 'edit'])->name('form.material.edit');
+//     // material edit id
+//     Route::put('/material/form/edit/{id?}', [MaterialController::class, 'edit'])->name('form.material.edit');
 
-    // material updated
-    Route::put('/material/form/edited', [MaterialController::class, 'updated'])->name('form.material.updated');
+//     // material updated
+//     Route::put('/material/form/edited', [MaterialController::class, 'updated'])->name('form.material.updated');
 
-    // category
-    // category create
-    Route::POST('/category/form', [CategoryController::class, 'create'])->name('form.category');
+//     // category
+//     // category create
+//     Route::POST('/category/form', [CategoryController::class, 'create'])->name('form.category');
     
-    // category delete
-    Route::DELETE('/material/delete/{id?}', [CategoryController::class, 'delete'])->name('form.category.delete');
+//     // category delete
+//     Route::DELETE('/material/delete/{id?}', [CategoryController::class, 'delete'])->name('form.category.delete');
     
-    // category edit
-    Route::PUT('/material/edit/{id?}', [CategoryController::class, 'editData'])->name('form.category.editData');
+//     // category edit
+//     Route::PUT('/material/edit/{id?}', [CategoryController::class, 'editData'])->name('form.category.editData');
 
-    // category edit
-    Route::POST('/material/edited', [CategoryController::class, 'updated'])->name('form.category.edited');
+//     // category edit
+//     Route::POST('/material/edited', [CategoryController::class, 'updated'])->name('form.category.edited');
     
-});
+// });
 
-Route::group(['prefix' => 'seller/form'], function(){
-    Route::get('category', [CategoryController::class, "index"])->name('category');
-    Route::get('material', [MaterialController::class, "index"])->name('material');
-    Route::get('voucher', [VoucherController::class, "index"])->name('voucher');
-    Route::get('size', [SizeController::class, "size"])->name('size');
-    Route::get('color', [ColorController::class, "color"])->name('color');
-});
+// Route::group(['prefix' => 'seller/form'], function(){
+//     Route::get('category', [CategoryController::class, "index"])->name('category');
+//     Route::get('material', [MaterialController::class, "index"])->name('material');
+//     Route::get('voucher', [VoucherController::class, "index"])->name('voucher');
+//     Route::get('size', [SizeController::class, "size"])->name('size');
+//     Route::get('color', [ColorController::class, "color"])->name('color');
+// });
 
-Route::group(['prefix' => 'form'], function(){
-    Route::POST('seller/color', [ColorController::class, 'create'])->name('color.seller');
-    Route::PUT('seller/coloredit', [ColorController::class, 'edit'])->name('coloredit.seller');
-    Route::POST('seller/colorupdate', [ColorController::class, 'update'])->name('colorupdate.seller');
-    Route::DELETE('seller/colordelete/{id?}', [ColorController::class, 'delete'])->name('colordelete.seller');
-});
+// Route::group(['prefix' => 'form'], function(){
+//     Route::POST('seller/color', [ColorController::class, 'create'])->name('color.seller');
+//     Route::PUT('seller/coloredit', [ColorController::class, 'edit'])->name('coloredit.seller');
+//     Route::POST('seller/colorupdate', [ColorController::class, 'update'])->name('colorupdate.seller');
+//     Route::DELETE('seller/colordelete/{id?}', [ColorController::class, 'delete'])->name('colordelete.seller');
+// });
 
-Route::group(['prefix' => 'form'], function(){
-    Route::POST('seller/size', [SizeController::class, 'create'])->name('size.seller');
-    Route::PUT('seller/sizeedit', [SizeController::class, 'edit'])->name('sizeedit.seller');
-    Route::POST('seller/sizeupdate', [SizeController::class, 'update'])->name('sizeupdate.seller');
-    Route::DELETE('seller/sizedelete/{id?}', [SizeController::class, 'delete'])->name('sizedelete.seller');
-});
+// Route::group(['prefix' => 'form'], function(){
+//     Route::POST('seller/size', [SizeController::class, 'create'])->name('size.seller');
+//     Route::PUT('seller/sizeedit', [SizeController::class, 'edit'])->name('sizeedit.seller');
+//     Route::POST('seller/sizeupdate', [SizeController::class, 'update'])->name('sizeupdate.seller');
+//     Route::DELETE('seller/sizedelete/{id?}', [SizeController::class, 'delete'])->name('sizedelete.seller');
+// });
 
 
 

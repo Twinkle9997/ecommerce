@@ -13,11 +13,11 @@
             </div>
         @endif
 
-        <form id="formSubmit" action="{{ route('form.material.updated') }}" method="post" class="flex flex-col gap-2">
+        <form id="formSubmit" action="{{ route('seller.material.update', ['id' => $mat->id]) }}" method="post" class="flex flex-col gap-2">
             @csrf
 
             <x-common.input-with-label type="text" placeholder="Coupon" warningText="(Coupon Code)" name='material'
-                value="{{ $mat->material }}" label="Create Coupon" />
+                value="{{ $mat->material }}"  label="Create Coupon" />
 
             <input type="hidden" name="id" value="{{ $mat->id }}">
 

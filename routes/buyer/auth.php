@@ -10,4 +10,4 @@ use Illuminate\Support\Facades\Route;
 | All routes are already protected with 'auth:web' middleware
 |
 */
-Route::get('/dashboard', 'DashboardController')->name('dashboard');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

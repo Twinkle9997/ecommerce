@@ -59,7 +59,6 @@ class AuthController extends Controller
             return "bye";
         }
 
-        return $req->input();
     }
 
     public function CheckOtp(Request $req)

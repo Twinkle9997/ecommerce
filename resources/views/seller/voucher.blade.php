@@ -6,13 +6,13 @@
         <div class="text-center mb-3 text-textRed text-[calc(15px+1vw)] font-semibold">
             Create Voucher
         </div>
-        <form id="formSubmit" action="{{ route('form.voucher') }}" method="post" class="flex flex-col gap-2">
+        <form id="formSubmit" action="{{ route('seller.voucher') }}" method="post" class="flex flex-col gap-2">
             @csrf
             <x-common.input-with-label type="text" placeholder="Coupon" warningText=" (Coupon Code)" name='coupon'
-                label="Create Coupon" />
+                label="Create Coupon" value="" />
 
             <x-common.input-with-label type="text" placeholder="In Percentage" warningText=" (In Percentage)"
-                name='percent' label="Percent" />
+                name='percent' label="Percent" value="" />
 
             <div>
                 <label for="category" class="text-sm sm:text-base">
@@ -28,10 +28,10 @@
             </div>
 
             <x-common.input-with-label type="datetime-local" placeholder="" warningText=" (Coupon start date)"
-                name='startDate' label="Coupon Start Date" />
+                name='startDate' label="Coupon Start Date" value="" />
 
             <x-common.input-with-label type="datetime-local" placeholder="" warningText=" (Coupon end date)" name='endDate'
-                label="Coupon End Date" />
+                label="Coupon End Date" value="" />
 
 
 
@@ -96,16 +96,16 @@
 
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('voucher.delete', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.voucher.delete', ['id' => $data->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="p-2 bg-red-700 shadow fas fa-trash text-white rounded text-sm">
                                     </button>
                                 </form>
 
-                                <form action="{{ route('form.voucher.edit', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.voucher.edit', ['id' => $data->id]) }}" method="post">
                                     @csrf
-                                    @method('PUT')
+                                    @method('get')
                                     <button class="p-2 bg-green-600 shadow fas fa-edit text-white rounded text-sm">
                                     </button>
                                 </form>

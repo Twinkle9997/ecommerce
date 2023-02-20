@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
-use App\Models\seller\Categories;
-use App\Models\seller\Colors;
-use App\Models\Seller\Couriers;
-use App\Models\seller\Files;
-use App\Models\seller\Materials;
-use App\Models\seller\Products;
-use App\Models\seller\Sizes;
-use App\Models\seller\Vouchers;
+use App\Models\Categories;
+use App\Models\Colors;
+use App\Models\Couriers;
+use App\Models\Files;
+use App\Models\Materials;
+use App\Models\Products;
+use App\Models\Sizes;
+use App\Models\Vouchers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

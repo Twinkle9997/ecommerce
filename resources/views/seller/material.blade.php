@@ -13,14 +13,14 @@
             </div>
         @endif
 
-        <form id="formSubmit" action="{{ route('form.material') }}" method="post" class="flex flex-col gap-2">
+        <form id="formSubmit" action="{{ route('seller.material') }}" method="post" class="flex flex-col gap-2">
             @csrf
-            <x-common.input-with-label type="text" placeholder="Coupon" warningText="" name='material'
+            <x-common.input-with-label type="text" placeholder="Coupon" warningText="" name='material' value=""
                 label="Create Material Or Fabric" />
 
 
             <div class="text-center">
-                <x-common.button-second type="Submit" title="Create" />
+                <x-common.button-second type="submit" title="reate" />
             </div>
         </form>
     </div>
@@ -51,16 +51,16 @@
                         <td class="capitalize"> {{ $data['material'] }} </td>
                         <td>
                             <div class="flex justify-center gap-2">
-                                <form action="{{ route('form.material.delete', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.material.delete', ['id' => $data->id]) }}" method="post">
                                     @csrf
                                     @method('delete')
                                     <button class="p-2 bg-red-700 shadow fas fa-trash text-white rounded text-sm">
                                     </button>
                                 </form>
 
-                                <form action="{{ route('form.material.edit', ['id' => $data->id]) }}" method="post">
+                                <form action="{{ route('seller.material.edit', ['id' => $data->id]) }}" method="post">
                                     @csrf
-                                    @method('put')
+                                    @method('get')
                                     <button
                                         class="p-2 bg-green-600 shadow fas fa-pencil text-white rounded text-sm"></button>
                                 </form>

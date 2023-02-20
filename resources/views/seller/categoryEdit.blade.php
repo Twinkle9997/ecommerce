@@ -8,7 +8,7 @@
             Update Category
         </p>
 
-        <form id="formSubmit" action="{{ route('form.category.edited') }}" method="post"
+        <form id="formSubmit" action="{{ route('seller.category.update', ['id' => $cat->id]) }}" method="post"
             class="flex flex-col gap-2 capitalize">
             @csrf
             @method('post')

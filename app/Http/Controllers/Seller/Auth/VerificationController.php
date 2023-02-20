@@ -14,7 +14,7 @@ class VerificationController extends Controller
             "otp" => "required",
         ]);
 
-        $data = Seller::where("email", session()->get('email'))->where('otp', $req->otp)->exists();
+        $data = Seller::where("email", session()->get('email'))->where('otp', $req->otp)->first();
 
         if($data)
         {
